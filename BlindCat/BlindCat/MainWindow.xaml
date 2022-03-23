@@ -1,0 +1,106 @@
+﻿<Window x:Class="BlindCat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlindCat"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Grid x:Name="Top" Height="70" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel>
+                    <Label Content="Дата начала"/>
+                    <TextBox x:Name="tb_begindate" Width="120" HorizontalAlignment="Left" Margin="5 0 0 0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <Label Content="Дата начала"/>
+                    <TextBox x:Name="tb_enddate" Width="120" HorizontalAlignment="Left" Margin="5 0 0 0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <Separator Opacity="0" Height="20"/>
+                    <Button x:Name="btn_get" Content="Получить" Width="130" Click="btn_get_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <ListView x:Name="lv" Height="200" ItemsSource="{Binding Sales}" Grid.Row="1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Client.LastName}"/>
+                            <DataGrid ItemsSource="{Binding Telephones}">
+                                <DataGridTextColumn Header="Артикул" Binding="{Binding Articul}"/>
+                                <DataGridTextColumn Header="Производитель" Binding="{Binding Manufacturer}"/>
+                                <DataGridTextColumn Header="Наименование" Binding="{Binding NameTelephone}"/>
+                                <DataGridTextColumn Header="Количество" Binding="{Binding Count}"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding Cost}"/>
+                            </DataGrid>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid x:Name="Bottom" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox FontSize="16" x:Name="cb_diag" Width="150" Height="30">
+                    <ComboBoxItem Content="Фирмы"/>
+                    <ComboBoxItem Content="Продажи"/>
+                </ComboBox>
+
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="right" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Сформировать чек" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="80" Height="80">
+                        <Image Source="res\WordIcon.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Width="80" Height="80">
+                        <Image Source="res\ExcelIcon.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+                <Label Content="Сформировать отчетность" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="80" Height="80">
+                        <Image Source="res\WordIcon.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Width="80" Height="80">
+                        <Image Source="res\ExcelIcon.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
